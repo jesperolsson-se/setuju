@@ -8,11 +8,16 @@ reviewers won't waste their time on low-quality requests.
 
 Add the App's private key to `.env`.
 
-Next, install and run.
+Next, build the Docker image.
 
 ```
-bundle install
-bundle exec ruby server.rb
+docker build -t setuju .
+```
+
+Finally, run the container.
+
+```
+docker run -d --rm -p 8080:8080 -v $(pwd)/.env:/app/.env setuju
 ```
 
 # How to contribute
