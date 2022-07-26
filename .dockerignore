@@ -3,3 +3,4 @@
 !Gemfile
 !Gemfile.lock
 !server.rb
+!lib/*
