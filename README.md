@@ -26,3 +26,6 @@ Thank you for considering to contribute to this project. We appreciate all
 efforts to improve Setuju, no matter how small. Please fork the repo, make your
 changes, and submit a pull request.
 
+```bash
+bundle exec rubocop
+```

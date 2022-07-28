@@ -15,4 +15,4 @@ EXPOSE 8080
 
 COPY . .
 
-CMD ["bundle", "exec", "ruby server.rb"]
+CMD ["bundle", "exec", "ruby lib/server.rb"]
