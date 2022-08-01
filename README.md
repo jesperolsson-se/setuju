@@ -4,6 +4,9 @@
 [![CD](https://github.com/jesperolsson-se/setuju/actions/workflows/main.yml/badge.svg)](https://github.com/jesperolsson-se/setuju/actions/workflows/main.yml/badge.svg)
 [![Docker](https://img.shields.io/docker/v/jesperolssonse/setuju/latest)](https://hub.docker.com/repository/docker/jesperolssonse/setuju)
 
+[![Rubocop](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rubystyle.guide)
+
 Pull request reviews is a key activity to control quality. It's also a
 time-consuming (read: expensive) task. **Setuju** analyzes PR metrics so that
 reviewers won't waste their time on low-quality requests.
