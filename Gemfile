@@ -10,4 +10,5 @@ gem 'rspec', require: false
 gem 'rubocop', require: false
 gem 'rubocop-rake', require: false
 gem 'rubocop-rspec', require: false
+gem 'simplecov', require: false, group: :test
 gem 'sinatra', '~> 2.0'
