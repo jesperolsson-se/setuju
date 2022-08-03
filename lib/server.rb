@@ -9,6 +9,7 @@ require 'jwt'         # Authenticates a GitHub App
 require 'time'        # Gets ISO 8601 representation of a Time object
 require 'logger'      # Logs debug statements
 require_relative 'investigation'
+require_relative 'policy'
 
 set :port, 8080
 set :bind, '0.0.0.0'
@@ -53,7 +54,7 @@ class GHAapp < Sinatra::Application
   def handle_pull_request_opened_event(payload)
     repo = payload['repository']['full_name']
     pr = payload['pull_request']['number']
-    @installation_client.add_comment(repo, pr, Investigation.new(payload).dossier)
+    @installation_client.add_comment(repo, pr, Policy.new(Investigation.new(payload).dossier))
   end
 
   # Saves the raw payload and converts the payload to JSON format

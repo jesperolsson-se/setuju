@@ -9,6 +9,6 @@ RSpec.describe Investigation do
       Investigation.new(
         JSON.parse(File.read('spec/data/pr_payload'))
       ).dossier
-    ).to eq '1 files changed'
+    ).to eq 1
   end
 end
