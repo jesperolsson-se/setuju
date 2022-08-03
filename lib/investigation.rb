@@ -15,6 +15,6 @@ class Investigation
   ##
   # Asks the object to provide a dossier for the pull request.
   def dossier
-    format('%d files changed', @json['pull_request']['changed_files'])
+    @json['pull_request']['changed_files']
   end
 end
