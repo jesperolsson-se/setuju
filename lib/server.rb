@@ -11,6 +11,8 @@ require 'logger'      # Logs debug statements
 require_relative 'investigation'
 require_relative 'policy'
 require_relative 'request/fresh'
+require_relative 'request/payload'
+require_relative 'request/error_handled'
 
 set :port, 8080
 set :bind, '0.0.0.0'
@@ -37,7 +39,11 @@ class GHAapp < Sinatra::Application
 
   # Executed before each request to the `/event_handler` route
   before '/event_handler' do
-    get_payload_request(request)
+    @payload = ErrorHandled.new(
+      Payload.new(
+        Fresh.new(request)
+      )
+    ).json
     # verify_webhook_signature
     app_client
     # Authenticate the app installation in order to run API operations
@@ -56,17 +62,6 @@ class GHAapp < Sinatra::Application
     repo = payload['repository']['full_name']
     pr = payload['pull_request']['number']
     @installation_client.add_comment(repo, pr, Policy.new(Investigation.new(payload).dossier))
-  end
-
-  # Saves the raw payload and converts the payload to JSON format
-  def get_payload_request(request)
-    # The raw text of the body is required for webhook signature verification
-    @payload_raw = Fresh.new(request).body
-    begin
-      @payload = JSON.parse @payload_raw
-    rescue StandardError => e
-      raise "Invalid JSON (#{e}): #{@payload_raw}"
-    end
   end
 
   # Instantiate an Octokit client authenticated as a GitHub App.
