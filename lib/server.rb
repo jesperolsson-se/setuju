@@ -10,6 +10,7 @@ require 'time'        # Gets ISO 8601 representation of a Time object
 require 'logger'      # Logs debug statements
 require_relative 'investigation'
 require_relative 'policy'
+require_relative 'request/fresh'
 
 set :port, 8080
 set :bind, '0.0.0.0'
@@ -59,11 +60,8 @@ class GHAapp < Sinatra::Application
 
   # Saves the raw payload and converts the payload to JSON format
   def get_payload_request(request)
-    # request.body is an IO or StringIO object
-    # Rewind in case someone already read it
-    request.body.rewind
     # The raw text of the body is required for webhook signature verification
-    @payload_raw = request.body.read
+    @payload_raw = Fresh.new(request).body
     begin
       @payload = JSON.parse @payload_raw
     rescue StandardError => e
