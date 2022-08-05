@@ -61,7 +61,7 @@ class GHAapp < Sinatra::Application
   def handle_pull_request_opened_event(payload)
     repo = payload['repository']['full_name']
     pr = payload['pull_request']['number']
-    @installation_client.add_comment(repo, pr, Policy.new(Investigation.new(payload).dossier))
+    @installation_client.add_comment(repo, pr, Policy.new(Investigation.new(payload).dossier).verdict)
   end
 
   # Instantiate an Octokit client authenticated as a GitHub App.
