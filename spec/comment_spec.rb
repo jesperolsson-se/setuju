@@ -8,6 +8,6 @@ RSpec.describe Comment do
     expect(endpoint).to receive(:add_comment)
     policy = double('policy')
     expect(policy).to receive(:verdict)
-    Comment.new(endpoint, 'repo', 1, policy).post
+    Comment.new(endpoint, policy).post
   end
 end

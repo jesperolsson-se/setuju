@@ -53,9 +53,10 @@ class GHAapp < Sinatra::Application
   post '/event_handler' do
     if request.env['HTTP_X_GITHUB_EVENT'] == 'pull_request' && @payload['action'] == 'opened'
       Comment.new(
-        @installation_client,
-        @payload['repository']['full_name'],
-        @payload['pull_request']['number'],
+        Target.new(
+          @installation_client,
+          @payload
+        ),
         Policy.new(Investigation.new(@payload).dossier)
       ).post
     end

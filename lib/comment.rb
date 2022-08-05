@@ -7,19 +7,15 @@ class Comment
   # Ctor.
   #
   # @param endpoint The endpoint of the pull request.
-  # @param repo The GitHub repository.
-  # @param pull The pull request.
   # @param policy (See Policy)
-  def initialize(endpoint, repo, pull, policy)
+  def initialize(endpoint, policy)
     @endpoint = endpoint
-    @repo = repo
-    @pull = pull
     @policy = policy
   end
 
   ##
   # Asks the object to post itself to the endpoint.
   def post
-    @endpoint.add_comment(@repo, @pull, @policy.verdict)
+    @endpoint.add_comment(@policy.verdict)
   end
 end
